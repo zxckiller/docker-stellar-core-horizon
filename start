@@ -20,6 +20,7 @@ function main() {
 	echo "Starting Stellar Quickstart"
 	echo ""
 
+	#set -x
 	process_args $*
 
 	echo "mode: $STELLAR_MODE"
@@ -28,10 +29,15 @@ function main() {
 	copy_defaults
 	init_db
 	init_stellar_core
+
+	read -s -p "Wait for debug stellar-core" PGPASS222
+
+
+
 	init_horizon
 	copy_pgpass
 
-	stop_postgres  # this gets started in init_db
+	#stop_postgres  # this gets started in init_db
 
 	# launch services
 	exec_supervisor
@@ -107,7 +113,8 @@ function set_pg_password() {
 
 	# use a random password when ephemeral (or some other unknown mode)
 	if [ "$STELLAR_MODE" != "persistent" ]; then
-		PGPASS=$(head /dev/urandom | tr -dc 'a-zA-Z0-9' |  head -c 16)
+		#PGPASS=$(head /dev/urandom | tr -dc 'a-zA-Z0-9' |  head -c 16)
+		PGPASS="1234"
 		echo "postgres password: $PGPASS"
 		return 0
 	fi

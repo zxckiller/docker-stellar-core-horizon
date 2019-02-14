@@ -1,0 +1,12 @@
+FROM stellar/quickstart:latest
+
+ADD start /
+ADD common /opt/stellar-default/common
+ADD pubnet /opt/stellar-default/pubnet
+ADD testnet /opt/stellar-default/testnet
+ADD standalone /opt/stellar-default/standalone
+
+RUN ["chmod", "+x", "start"]
+
+
+ENTRYPOINT ["bash" ]
